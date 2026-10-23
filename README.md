@@ -17,6 +17,22 @@ pdf-lib are bundled with the extension, and every PDF is processed in your brows
 
 ## Install
 
+### Download (recommended)
+
+No git or build tools needed.
+
+1. Download **[private-pdf-reader-1.0.0.zip](https://github.com/jonra/private-pdf-reader/releases/latest/download/private-pdf-reader-1.0.0.zip)**
+   from the [latest release](https://github.com/jonra/private-pdf-reader/releases/latest).
+2. Unzip it. You get a folder called `private-pdf-reader`.
+   Keep it somewhere permanent, because Chrome loads the extension from that folder.
+3. Open `chrome://extensions` (or `edge://extensions`).
+4. Turn on **Developer mode** (top right).
+5. Click **Load unpacked** and select the `private-pdf-reader` folder.
+6. Open any `.pdf` link on the web. It loads in the reader.
+
+To update, download the new release, replace the folder's contents and click
+the reload icon on the extension's card.
+
 ### From source (load unpacked)
 
 1. Clone this repository:
