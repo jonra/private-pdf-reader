@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Reader</title>
+<link rel="stylesheet" href="viewer.css">
+<script src="lib/pdf.min.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+</head>
+<body>
+  <div class="loadbar" id="loadbar"></div>
+
+  <div class="toolbar">
+    <div class="brand">
+      <div class="logo">P</div>
+      <span class="wordmark">PDF Reader</span>
+    </div>
+    <button class="btn icon" id="toggleSidebar" title="Toggle sidebar">☰</button>
+    <button class="btn primary" id="openBtn">Open PDF</button>
+    <span class="title" id="docTitle">No document</span>
+    <div class="spacer"></div>
+    <div class="pageind">
+      <input id="pageInput" value="–" /> <span class="of">/</span> <span id="pageCount">–</span>
+    </div>
+    <button class="btn icon" id="zoomOut" title="Zoom out">−</button>
+    <span class="zoom" id="zoomLabel">100%</span>
+    <button class="btn icon" id="zoomIn" title="Zoom in">+</button>
+    <button class="btn" id="fitWidth" title="Fit width">Fit</button>
+    <button class="btn" id="themeBtn" title="Switch theme">🎨 <span id="themeName">Sprout</span></button>
+    <button class="btn" id="signBtn" title="Add signature">✍️ Sign</button>
+    <button class="btn primary" id="saveBtn" title="Download signed PDF" style="display:none">⬇ Save signed</button>
+  </div>
+
+  <div class="body">
+    <aside class="sidebar" id="sidebar">
+      <div class="tabs">
+        <div class="tab active" data-pane="thumbs">Pages</div>
+        <div class="tab" data-pane="outline">Outline</div>
+        <div class="tab" data-pane="search">Search</div>
+      </div>
+      <div class="panes">
+        <div class="pane active" id="pane-thumbs"><div class="hint">Open a PDF to see page thumbnails.</div></div>
+        <div class="pane" id="pane-outline"><div class="hint">No outline available.</div></div>
+        <div class="pane" id="pane-search">
+          <div class="search-box">
+            <input id="searchInput" placeholder="Search in document…" />
+          </div>
+          <div id="searchResults"><div class="hint">Type and press Enter to search all pages.</div></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="viewer" id="viewer">
+      <div class="empty" id="empty">
+        <div class="empty-icon">📄</div>
+        <h2>Drop a PDF here</h2>
+        <div>or click <strong>Open PDF</strong> in the toolbar</div>
+        <div class="lock">🔒 Everything stays on this device — nothing is uploaded.</div>
+      </div>
+      <div id="pages" style="display:none"></div>
+    </main>
+  </div>
+
+  <input type="file" id="fileInput" accept="application/pdf" />
+
+  <!-- Signature modal -->
+  <div class="modal-bg" id="sigModal">
+    <div class="modal">
+      <h3>Add your signature</h3>
+      <div class="m-tabs">
+        <div class="m-tab active" data-sigtab="draw">Draw</div>
+        <div class="m-tab" data-sigtab="type">Type</div>
+      </div>
+      <div id="sigtab-draw">
+        <div id="sigPadWrap">
+          <canvas id="sigPad"></canvas>
+          <span class="sig-clear" id="sigClear">Clear</span>
+        </div>
+      </div>
+      <div id="sigtab-type" style="display:none">
+        <input id="sigType" placeholder="Type your name" />
+        <div class="type-fonts" id="typeFonts">
+          <span class="ff active" data-font="Sig Script">Script</span>
+          <span class="ff" data-font="Sig Elegant">Elegant</span>
+          <span class="ff" data-font="Sig Casual">Casual</span>
+          <span class="ff" data-font="Sig Classic">Classic</span>
+        </div>
+      </div>
+      <div class="modal-hint">After adding, drag to position and drag the green dot to resize. Then click <strong>Save signed</strong>.</div>
+      <div class="modal-actions">
+        <button class="btn" id="sigCancel">Cancel</button>
+        <button class="btn primary" id="sigAdd">Add to page</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="viewer.js"></script>
+</body>
+</html>
